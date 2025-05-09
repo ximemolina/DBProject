@@ -1,0 +1,28 @@
+{
+  "name": "dbproject",
+  "version": "1.0.0",
+  "description": "Proyecto Bases de Datos",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/config/index.js",
+    "dev": "tailwindcss -i ./public/css/input.css -o ./public/css/style.css --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ximemolina/DBProject.git"
+  },
+  "author": "Ximena Molina - Susana Feng",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ximemolina/DBProject/issues"
+  },
+  "homepage": "https://github.com/ximemolina/DBProject#readme",
+  "dependencies": {
+    "@tailwindcss/cli": "^4.1.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "mssql": "^11.0.1",
+    "tailwindcss": "^4.1.5"
+  }
+}
