@@ -39,7 +39,7 @@ export async function conectarDB() { //conexión con base de datos
     }
 }
 
-async function enviarXML() { //ejecuta sp para cargar datos de xml a tablas de la base de datos
+async function enviarXML() { //ejecuta sp para cargar datos catalogo de xml a tablas de la base de datos
     try {
         const pool = await sql.connect(config);
 
