@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Pantalla de Gestión</title>
+      <link href="/css/style.css" rel="stylesheet">
+      <script src="/js/principalAdminClient.js" defer></script>
+
+  </head>
+  <body class="flex h-screen items-center justify-center bg-gray-100">
+    <div class="rounded-lg ml-4 mr-4 mu-5 relative overflow-hidden">
+      <button id="btnSalir" class="h-8 w-32 rounded-lg text-lg font-bold float justify-center bg-[#314262] text-[#ffffff] uppercase">Salir</button>
+    
+      <input id="inputBuscar" placeholder="Buscar..." autocomplete="off" class="rounded-lg px-5 py-2.5 text-lg font-bold ml-13 border border-[#cccccc] bg-[#ffffff] text-[#b6b6b6] focus:outline focus:outline-8 focus:outline-offset-4 focus:outline-[#aaaaaa]" />
+    
+      <button id="btnFiltrar" class="font-bold rounded-lg text-lg w-32 h-8 ml-1 justify-center bg-[#314262] text-[#ffffff] uppercase">FILTRAR</button>
+    </div>
+  
+    <!-- Botones -->
+    <div class="rounded-lg ml-4 mr-4 mu-5 relative overflow-hidden">
+      <button id="btnInsertar" class="h-8 w-48 rounded-lg text-lg font-bold justify-center bg-[#2ca816] text-[#ffffff] uppercase">Insertar</button>
+      <button id="btnEliminar" class="h-8 w-48 rounded-lg text-lg font-bold ml-1 justify-center bg-[#cd1717] text-[#ffffff] uppercase">Eliminar</button>
+      <button id="btnModificar" class="h-8 w-48 rounded-lg text-lg font-bold ml-1 justify-center bg-[#265fbb] text-[#ffffff] uppercase">Modificar</button>
+      <button id="btnConsultar" class="h-8 w-48 rounded-lg text-lg font-bold ml-1 justify-center bg-[#265fbb] text-[#ffffff] uppercase">Consultar</button>
+      <button id="btnImpersonar" class="h-8 w-48 rounded-lg text-lg font-bold ml-1 justify-center bg-[#265fbb] text-[#ffffff] uppercase">Impersonar</button>
+    </div>
+
+    <!-- Tabla -->
+    <div id ="tablaEmpleados" class="ml-4 mr-4 mu-5 h-14 overflow-auto overflow-hidden"></div>
+  </body>
+</html>
