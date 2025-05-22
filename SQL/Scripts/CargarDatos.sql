@@ -1,7 +1,7 @@
 USE [DBProject]
 GO
 
-/****** Object:  StoredProcedure [dbo].[CargarDatos]    Script Date: 19/5/2025 18:21:43 ******/
+/****** Object:  StoredProcedure [dbo].[CargarDatos]    Script Date: 22/5/2025 13:29:22 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -18,7 +18,7 @@ BEGIN
 
 		BEGIN TRY
 		
-			SET @outResultCode = 0; --Cï¿½digo exito
+			SET @outResultCode = 0; --Código exito
 
 			--Convertir variable nvarchar a variable xml
 			DECLARE @xml XML
@@ -217,7 +217,7 @@ BEGIN
 			FROM 
 				@tempEmpleado AS E;
 
-			---Comienza inserciï¿½n de datos desde tablas variables a tablas del proyecto
+			---Comienza inserción de datos desde tablas variables a tablas del proyecto
 			BEGIN TRANSACTION InsertarDatos
 
 			--Inserta fecha y nombre de feriados
@@ -257,7 +257,7 @@ BEGIN
 			--Insertar tipo de deduccion
 			WHILE ( @lo2<=@hi2 )
 			BEGIN
-				---Revisar si el tipo de deducciï¿½n es obligatoria
+				---Revisar si el tipo de deducción es obligatoria
 				IF ( SELECT 
 						TD.TipoDeduccion.value( '(/TipoDeDeduccion/@Obligatorio)[1]', 'VARCHAR(64)' )
 					FROM 
@@ -265,11 +265,11 @@ BEGIN
 					WHERE 
 						TD.Sec = @lo2 ) = 'Si'
 				BEGIN
-					SET @ObligatorioFlag = 1; ---Es deducciï¿½n obligatoria
+					SET @ObligatorioFlag = 1; ---Es deducción obligatoria
 				END;
 				ELSE
 				BEGIN
-					SET @ObligatorioFlag = 0; ---No es deducciï¿½n obligatoria
+					SET @ObligatorioFlag = 0; ---No es deducción obligatoria
 				END;
 
 				---Revisar si el tipo de deduccion es porcentual
@@ -281,7 +281,7 @@ BEGIN
 				END;
 				ELSE
 				BEGIN
-					SET @PorcentualFlag = 0; ---No es deducciï¿½n porcentual
+					SET @PorcentualFlag = 0; ---No es deducción porcentual
 				END;
 
 				--Obtener ID del tipo de deduccion a insertar
@@ -346,11 +346,9 @@ BEGIN
 			WHILE ( @lo4 <= @hi4 )
 			BEGIN
 
-				INSERT INTO dbo.Puesto ( Id
-					, Nombre
+				INSERT INTO dbo.Puesto ( Nombre
 					, SalarioXHora )
 				SELECT
-					P.Puesto.value( '(/Puesto/@Id)[1]', 'INT' ),
 					P.Puesto.value( '(/Puesto/@Nombre)[1]', 'VARCHAR(64)' ),
 					P.Puesto.value( '(/Puesto/@SalarioXHora)[1]', 'MONEY' )
 				FROM 
@@ -435,7 +433,7 @@ BEGIN
 			BEGIN
 				INSERT INTO dbo.Usuario( Id
 					,Nombre
-					,ContraseÃ±a
+					,Contraseña
 					,IdTipoUsuario )
 				SELECT 
 					U.Usuario.value( '(/Usuario/@Id)[1]', 'INT' ),
@@ -473,17 +471,17 @@ BEGIN
 					U.id,
 					E.Empleado.value( '(/Empleado/@Activo)[1]', 'INT' )
 				FROM 
-					@tempEmpleado AS E
+					dbo.Puesto AS P
+					,@tempEmpleado AS E
 				INNER JOIN dbo.TipoDocId AS TDI
 				ON E.Empleado.value( '(/Empleado/@IdTipoDocumento)[1]', 'INT' ) = TDI.id
 				INNER JOIN dbo.Departamento AS D
 				ON E.Empleado.value( '(/Empleado/@IdDepartamento)[1]', 'INT' ) = D.id
-				INNER JOIN dbo.Puesto AS P
-				ON E.Empleado.value( '(/Empleado/@IdPuesto)[1]', 'INT' ) = P.id
 				INNER JOIN dbo.Usuario AS U
 				ON E.Empleado.value( '(/Empleado/@IdUsuario)[1]', 'INT' ) = U.id
 				WHERE
 					E.Sec = @lo10
+				AND P.Nombre = E.Empleado.value( '(/Empleado/@NombrePuesto)[1]', 'VARCHAR(64)' )
 
 				SET @lo10 = @lo10 + 1
 			END;
@@ -510,7 +508,7 @@ BEGIN
 				GETDATE()
 			);
 
-		SET @outResultCode = 50008;---Cï¿½digo error en base de datos
+		SET @outResultCode = 50008;---Código error en base de datos
 
 		END CATCH
 
