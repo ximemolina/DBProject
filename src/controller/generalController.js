@@ -7,7 +7,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 export const mainFile = async (req, res) => {
-    res.sendFile(path.join(__dirname, '../views/principalAdmin.html')); //sirve el html de la página inicial
+    res.sendFile(path.join(__dirname, '../views/login.html')); //sirve el html de la página inicial
 };
 
 export const getError = async (req,res) => {

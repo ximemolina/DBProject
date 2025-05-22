@@ -55,9 +55,9 @@ async function loginCorrecto(){
     try {
         //redirigir a pagina dependiento del tipo de usuario
         if(tipoUser == 'Administrador'){
-            window.location.href = 'http://localhost:3300/principal/AdminPrincipal';
+            window.location.href = 'http://localhost:3300/principalAdmin/ventanaPrincipalAdmin';
         }else {
-            window.location.href = 'http://localhost:3300/admin/EmpleadoPrincipal'; 
+            window.location.href = 'http://localhost:3300/principalEmpleado/EmpleadoPrincipal'; 
         }
     } catch (error) {
         console.error('Error:', error);
@@ -120,7 +120,6 @@ async function login(){
 
     try {
         tipoUser = await obtenerTipoUsuario(username);
-        console.log(tipoUser);
         const ipAdress = await fetchIp();
         const data = {username: username, IP: ipAdress, Tipo: tipoUser};
 
