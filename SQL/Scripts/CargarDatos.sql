@@ -18,7 +18,7 @@ BEGIN
 
 		BEGIN TRY
 		
-			SET @outResultCode = 0; --Código exito
+			SET @outResultCode = 0; --Cï¿½digo exito
 
 			--Convertir variable nvarchar a variable xml
 			DECLARE @xml XML
@@ -217,7 +217,7 @@ BEGIN
 			FROM 
 				@tempEmpleado AS E;
 
-			---Comienza inserción de datos desde tablas variables a tablas del proyecto
+			---Comienza inserciï¿½n de datos desde tablas variables a tablas del proyecto
 			BEGIN TRANSACTION InsertarDatos
 
 			--Inserta fecha y nombre de feriados
@@ -257,7 +257,7 @@ BEGIN
 			--Insertar tipo de deduccion
 			WHILE ( @lo2<=@hi2 )
 			BEGIN
-				---Revisar si el tipo de deducción es obligatoria
+				---Revisar si el tipo de deducciï¿½n es obligatoria
 				IF ( SELECT 
 						TD.TipoDeduccion.value( '(/TipoDeDeduccion/@Obligatorio)[1]', 'VARCHAR(64)' )
 					FROM 
@@ -265,11 +265,11 @@ BEGIN
 					WHERE 
 						TD.Sec = @lo2 ) = 'Si'
 				BEGIN
-					SET @ObligatorioFlag = 1; ---Es deducción obligatoria
+					SET @ObligatorioFlag = 1; ---Es deducciï¿½n obligatoria
 				END;
 				ELSE
 				BEGIN
-					SET @ObligatorioFlag = 0; ---No es deducción obligatoria
+					SET @ObligatorioFlag = 0; ---No es deducciï¿½n obligatoria
 				END;
 
 				---Revisar si el tipo de deduccion es porcentual
@@ -281,7 +281,7 @@ BEGIN
 				END;
 				ELSE
 				BEGIN
-					SET @PorcentualFlag = 0; ---No es deducción porcentual
+					SET @PorcentualFlag = 0; ---No es deducciï¿½n porcentual
 				END;
 
 				--Obtener ID del tipo de deduccion a insertar
@@ -435,7 +435,7 @@ BEGIN
 			BEGIN
 				INSERT INTO dbo.Usuario( Id
 					,Nombre
-					,Contraseña
+					,ContraseÃ±a
 					,IdTipoUsuario )
 				SELECT 
 					U.Usuario.value( '(/Usuario/@Id)[1]', 'INT' ),
@@ -510,7 +510,7 @@ BEGIN
 				GETDATE()
 			);
 
-		SET @outResultCode = 50008;---Código error en base de datos
+		SET @outResultCode = 50008;---Cï¿½digo error en base de datos
 
 		END CATCH
 

@@ -1,11 +1,8 @@
+let tipoUser;
+
 const btnLogin = document.getElementById("btnLogin");
 
 btnLogin.addEventListener("click", login);
-
-window.addEventListener('DOMContentLoaded', () => {
-    revisarBloqueo();
-  });
-
 
 //Consigue el IpAdress del usuario
 async function fetchIp(){
@@ -54,9 +51,14 @@ async function mostrarError(codigo){
 
 //Pasa a pagina principal
 async function loginCorrecto(){
-    console.log('Login exitoso');
+
     try {
-        window.location.href = 'http://localhost:3300/principal/ventanaPrincipal'; // Redirige a la nueva página
+        //redirigir a pagina dependiento del tipo de usuario
+        if(tipoUser == 'Administrador'){
+            window.location.href = 'http://localhost:3300/principal/AdminPrincipal';
+        }else {
+            window.location.href = 'http://localhost:3300/admin/EmpleadoPrincipal'; 
+        }
     } catch (error) {
         console.error('Error:', error);
     }
@@ -90,6 +92,26 @@ function revCodigo(codigo) {
     }
 }
 
+//Revisa si el usuario es administrador o cliente
+async function obtenerTipoUsuario(username){
+    try {
+        
+        const response = await fetch('/login/revTipoUsuario', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username })
+        });
+
+        const data = await response.json();
+        return data.resultado;
+
+    } catch (error) {
+        alert("Login error: " + error.message);
+    }
+}
+
 //Revisa los datos que ingresó el usuario a las casillas y verifica si el usuario ya está en la base de datos
 async function login(){
 
@@ -97,9 +119,10 @@ async function login(){
     const password = document.getElementById("password").value;
 
     try {
-        
+        tipoUser = await obtenerTipoUsuario(username);
+        console.log(tipoUser);
         const ipAdress = await fetchIp();
-        const data = {username: username, IP: ipAdress};
+        const data = {username: username, IP: ipAdress, Tipo: tipoUser};
 
         localStorage.setItem('user', JSON.stringify(data));
         fetch('/login/revLogin', {
