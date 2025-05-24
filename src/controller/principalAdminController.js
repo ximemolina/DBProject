@@ -13,13 +13,13 @@ export const principalAdminFile = async (req, res) => {
 
 // Controlador para enviar la tabla del BD como HTML
 export const listarEmpleados = async (req,res) => {
-    const tabla = await principalAdminFunctions.listarEmpleados;
+    const tabla = await principalAdminFunctions.listarEmpleados();
     if (tabla[0] == 0) {        //Revisa que el resultCode sea 0: exito
         let tableHTML = principalAdminFunctions.generarTabla(tabla[1]);
         res.send(tableHTML);
     }
     else {
-        console.log("Error: " + tabla[0], "No se pudo cargar la tabla")
+        console.log("Error: " + tabla, "No se pudo cargar la tabla")
     }
 };
 

@@ -33,24 +33,26 @@ probarEndpoint();
 // Genera la tabla traida de la BD en HTML
 export function generarTabla(tabla) {
     let tableHTML = `
-        <div class="shadow-md rounded-lg relative">
-            <table class="table-fixed w-full text-left">
-                <thead class="uppercase bg-[#2856b3] text-[#ffffff]" style="background-color: #2856b3; color: #ffffff;">
+        <div class="relative overflow-hidden rounded-lg shadow-md">
+            <table class="w-full table-fixed text-left">
+                <thead class="bg-[#003bb2] text-[#e5e7eb] uppercase" style="background-color: rgb(0, 59, 178); color: rgb(229, 231, 235);">
                     <tr>
-                        <td class="py-2 border border-gray-200 text-center p-4">NOMBRE</td>
-                        <td class="py-2 border border-gray-200 text-center p-4">PUESTO</td>
-                        <td class="py-2 border border-gray-200 text-center p-4">SELECCIONAR</td>
+                        <td class="border border-gray-200 p-4 py-1 text-center">DOCUMENTO IDENTIDAD</td>
+                        <td class="border border-gray-200 p-4 py-1 text-center">NOMBRE</td>
+                        <td class="border border-gray-200 p-4 py-1 text-center">PUESTO</td>
+                        <td class="border border-gray-200 p-4 py-1 text-center">SELECCIONAR</td>
                     </tr>
                 </thead>
-                <tbody class="bg-white text-gray-500 bg-[#FFFFFF] text-[#6b7280]" style="background-color: #FFFFFF; color: #6b7280;">
+                <tbody class="bg-[#FFFFFF] bg-white text-[#6b7280] text-gray-500" style="background-color: #FFFFFF; color: #6b7280;">
     `;
 
     tabla.forEach(item => {
         tableHTML += `
-            <tr class="py-0">
-                <td class="py-0 border border-gray-200 text-center p-4">${item.Nombre}</td>
-                <td class="py-0 border border-gray-200 text-center p-4">${item.Puesto}</td>
-                <td class="py-0 border border-gray-200 text-center p-4"><input type="checkbox" class="fila-checkbox" value="${item.Nombre}"></td>
+            <tr class="py-5">
+                <td class="border border-gray-200 p-4 py-5 text-center">${item.Identificacion}</td>
+                <td class="border border-gray-200 p-4 py-5 text-center">${item.Nombre}</td>
+                <td class="border border-gray-200 p-4 py-5 text-center">${item.Puesto}</td>
+                <td class="border border-gray-200 p-4 py-5 text-center"><input type="checkbox" class="fila-checkbox" value="${item.Nombre}"></td>
             </tr>
         `;
     });

@@ -8,25 +8,25 @@
       <script src="/js/principalAdminClient.js" defer></script>
 
   </head>
-  <body class="flex h-screen items-center justify-center bg-gray-100">
-    <div class="rounded-lg ml-4 mr-4 mu-5 relative overflow-hidden">
-      <button id="btnSalir" class="h-8 w-32 rounded-lg text-lg font-bold float justify-center bg-[#314262] text-[#ffffff] uppercase">Salir</button>
+  <body class="h-screen items-center justify-center bg-gray-100">
+    <div class="mt-3.5 ml-3.5">
+      <button id="btnSalir" class="font-bold rounded-lg text-xl  w-32 h-8 bg-[#000000] text-[#ffffff] justify-center hover:bg-gray-800">SALIR</button>
     
-      <input id="inputBuscar" placeholder="Buscar..." autocomplete="off" class="rounded-lg px-5 py-2.5 text-lg font-bold ml-13 border border-[#cccccc] bg-[#ffffff] text-[#b6b6b6] focus:outline focus:outline-8 focus:outline-offset-4 focus:outline-[#aaaaaa]" />
+      <input id="inputBuscar" placeholder="Buscar" autocomplete="off" class="px-3 py-2.5 text-xl font-bold rounded-lg border focus:outline focus:outline-2 focus:outline-offset-2 bg-[#ffffff] text-[#444444] focus:outline-[#aaaaaa] border-[#cccccc] ml-96">
     
-      <button id="btnFiltrar" class="font-bold rounded-lg text-lg w-32 h-8 ml-1 justify-center bg-[#314262] text-[#ffffff] uppercase">FILTRAR</button>
+      <button id="btnFiltrar" class="font-bold rounded-lg text-xl  w-32 h-8 bg-blue-800 text-[#ffffff] justify-center hover:bg-blue-700">FILTRAR</button>
     </div>
   
     <!-- Botones -->
-    <div class="rounded-lg ml-4 mr-4 mu-5 relative overflow-hidden">
-      <button id="btnInsertar" class="h-8 w-48 rounded-lg text-lg font-bold justify-center bg-[#2ca816] text-[#ffffff] uppercase">Insertar</button>
-      <button id="btnEliminar" class="h-8 w-48 rounded-lg text-lg font-bold ml-1 justify-center bg-[#cd1717] text-[#ffffff] uppercase">Eliminar</button>
-      <button id="btnModificar" class="h-8 w-48 rounded-lg text-lg font-bold ml-1 justify-center bg-[#265fbb] text-[#ffffff] uppercase">Modificar</button>
-      <button id="btnConsultar" class="h-8 w-48 rounded-lg text-lg font-bold ml-1 justify-center bg-[#265fbb] text-[#ffffff] uppercase">Consultar</button>
-      <button id="btnImpersonar" class="h-8 w-48 rounded-lg text-lg font-bold ml-1 justify-center bg-[#265fbb] text-[#ffffff] uppercase">Impersonar</button>
+    <div class="mt-3.5 ml-3.5">
+      <button id="btnInsertar" class="font-bold rounded-lg text-xl  w-48 h-9 bg-green-600 text-[#ffffff] justify-center hover:bg-green-500">INSERTAR</button>
+      <button id="btnEliminar" class="font-bold rounded-lg text-xl  w-48 h-9 bg-red-700 text-[#ffffff] justify-center hover:bg-red-600">ELIMINAR</button>
+      <button id="btnModificar" class="font-bold rounded-lg text-xl  w-48 h-9 bg-blue-800 text-[#ffffff] justify-center hover:bg-blue-700">MODIFICAR</button>
+      <button id="btnConsultar" class="font-bold rounded-lg text-xl  w-48 h-9 bg-blue-800 text-[#ffffff] justify-center hover:bg-blue-700">CONSULTAR</button>
+      <button id="btnImpersonar" class="font-bold rounded-lg text-xl  w-48 h-9 bg-blue-800 text-[#ffffff] justify-center hover:bg-blue-700">IMPERSONAR</button>
     </div>
 
     <!-- Tabla -->
-    <div id ="tablaEmpleados" class="ml-4 mr-4 mu-5 h-14 overflow-auto overflow-hidden"></div>
+    <div id="tablaEmpleados" class="relative rounded-lg shadow-md mt-2 overflow-auto h-screen">
   </body>
 </html>
