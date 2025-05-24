@@ -6,6 +6,9 @@ const router = Router();
 //ruta para ir a la página principal
 router.get('/ventanaPrincipalAdmin', principalAdminController.principalAdminFile);
 
+//ruta para actualizar evento logout
+router.post('/logout', principalAdminController.logout);
+
 //ruta para listar todos los empleados activos
 router.get('/listarEmpleados', principalAdminController.listarEmpleados);
 
@@ -14,8 +17,5 @@ router.get('/listarEmpleados', principalAdminController.listarEmpleados);
 
 //ruta para listar todos los empleados activos por documento de identificacion
 //router.post('/listarEmpleadosId', principalController.listarEmpleadosId);
-
-//ruta para actualizar evento logout
-//router.post('/logout', principalController.logout)
 
 export default router;

@@ -27,13 +27,12 @@ window.addEventListener('DOMContentLoaded', () => {
 //Regresa a la pagina del login
 async function regresarLogin() {
     try {
-        const nombreEvento = "Logout"
-        const response = await fetch('/principal/logout', {
+        const response = await fetch('/principalAdmin/logout', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
             },
-            body: JSON.stringify({username,ipAdress,nombreEvento})
+            body: JSON.stringify({ username, ipAdress })
         });
         localStorage.clear();
         const data = await response.json();
