@@ -31,13 +31,13 @@ export const listarEmpleados = async (req,res) => {
 };
 
 // Controlador para enviar la tabla por nombre del BD como HTML
-/*export const listarEmpleadosNombre = async (req,res) => {
+export const listarEmpleadosNombre = async (req,res) => {
     const { input, username, ipAdress } = req.body;
-    const response = await functionsDB.listarEmpleadosNombre(input, username, ipAdress);
+    const response = await principalAdminFunctions.listarEmpleadosNombre(input, username, ipAdress);
     const outResultCode = response[0];
     const recordset = response[1];
     if (outResultCode == 0) {        //Revisa que el resultCode sea 0: exito
-        let tableHTML = functionsDB.generarTabla(recordset);
+        let tableHTML = principalAdminFunctions.generarTabla(recordset);
         res.json({outResultCode, tableHTML});
     }
     else {
@@ -45,19 +45,3 @@ export const listarEmpleados = async (req,res) => {
         res.json({outResultCode});
     }
 };
-
-// Controlador para enviar la tabla por documento de indentidad del BD como HTML
-export const listarEmpleadosId = async (req,res) => {
-    const { input, username, ipAdress } = req.body;
-    let response = await functionsDB.listarEmpleadosId(input, username, ipAdress);
-    const outResultCode = response[0];
-    const recordset = response[1];
-    if (outResultCode == 0) {        //Revisa que el resultCode sea 0: exito
-        let tableHTML = functionsDB.generarTabla(recordset);
-        res.json({outResultCode, tableHTML});
-    }
-    else {
-        console.log("Error: " + outResultCode, "No se pudo cargar la tabla")
-        res.json({outResultCode});
-    }
-};*/

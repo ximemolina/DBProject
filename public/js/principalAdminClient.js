@@ -45,19 +45,11 @@ async function regresarLogin() {
 //Filtra la búsqueda en la tabla de empleados
 async function filtrarEmpleados() {
     const busqueda = (document.getElementById("inputBuscar").value).trim();
-    const tipoBusqueda = validarPrimerCaracter(busqueda);
-
-    switch (tipoBusqueda) {
-        case 1:
-            console.log("Filtrar por documento identidad");
-            listarEmpleadosId(busqueda);
-            break;
-        case 2:
-            console.log("Filtrar por nombre");
-            listarEmpleadosNombre(busqueda);
-            break;
-        default:
-            listarEmpleados();
+    if (busqueda != '') {
+        listarEmpleadosNombre(busqueda);
+    }
+    else {
+        listarEmpleados();
     }
     
 }
@@ -149,20 +141,10 @@ function impersonarEmpleado() {
 }
 
 /////////////////////////// FUNCIONES AUXILIARES ///////////////////////////
-//Valida primer caracter, si es letra es por nombre, si es numero por documento
-function validarPrimerCaracter(cadena) {
-    const primerCaracter = cadena[0];
-    if (/^[0-9]$/.test(primerCaracter)) {
-        return 1;
-    } else if (/^[A-Za-z]$/.test(primerCaracter)) {
-        return 2;
-    } 
-}
-
 //Carga la tabla filtrada por nombre
 async function listarEmpleadosNombre(input) {
     try {
-        const response = await fetch('/principal/listarEmpleadosNombre', {
+        const response = await fetch('/principalAdmin/listarEmpleadosNombre', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -179,34 +161,6 @@ async function listarEmpleadosNombre(input) {
         }
         else {
             console.log(outResultCode, "Nombre no alfabetico");
-            listarEmpleados();
-        }
-    } 
-    catch (error) {
-        console.error("Error al obtener empleados:", error);
-    } 
-}
-
-//Carga la tabla filtrada por documento identidad
-async function listarEmpleadosId(input) {
-    try {
-        const response = await fetch('/principal/listarEmpleadosId', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ input, username, ipAdress })
-        });
-        const data = await response.json();
-        const outResultCode = data.outResultCode;
-        if (outResultCode == 0) {
-            const tablaHTML = data.tableHTML;
-            document.getElementById("tablaEmpleados").innerHTML = tablaHTML; // Insertar en el HTML
-
-            assignEvtCheckbox();
-        }
-        else {
-            console.log(outResultCode, "Documento de indentidad invalido");
             listarEmpleados();
         }
     } 

@@ -13,9 +13,8 @@ router.post('/logout', principalAdminController.logout);
 router.get('/listarEmpleados', principalAdminController.listarEmpleados);
 
 //ruta para listar todos los empleados activos por nombre
-//router.post('/listarEmpleadosNombre', principalController.listarEmpleadosNombre);
+router.post('/listarEmpleadosNombre', principalAdminController.listarEmpleadosNombre);
 
-//ruta para listar todos los empleados activos por documento de identificacion
-//router.post('/listarEmpleadosId', principalController.listarEmpleadosId);
+
 
 export default router;
