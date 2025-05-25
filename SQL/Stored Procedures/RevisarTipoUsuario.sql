@@ -1,4 +1,14 @@
-CREATE PROCEDURE DBO.RevisarTipoUsuario(
+USE [DBProject]
+GO
+
+/****** Object:  StoredProcedure [dbo].[RevisarTipoUsuario]    Script Date: 25/5/2025 15:24:28 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[RevisarTipoUsuario](
 	@inUsername VARCHAR( 64 )
 	,@outResultCode INT OUTPUT )
 AS
@@ -7,14 +17,14 @@ BEGIN
 	SET NOCOUNT ON;
 
 	BEGIN TRY
-
+		
 		SET @outResultCode = 0
 
 		SELECT 
 			TU.Nombre ---Obtener Tipo Usuario
 		FROM DBO.Usuario AS U
 		INNER JOIN DBO.TipoUsuario AS TU
-		ON TU.ID = U.id
+		ON TU.ID = U.IdTipoUsuario
 		WHERE
 			U.Nombre = @inUsername ---Revisar que nombres de usuario coincidan
 
@@ -39,3 +49,5 @@ BEGIN
 
 END;
 GO
+
+
