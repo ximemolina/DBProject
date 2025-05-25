@@ -27,7 +27,7 @@ window.addEventListener('DOMContentLoaded', () => {
 //Regresa a la pagina del login
 async function regresarLogin() {
     try {
-        const response = await fetch('/principalAdmin/logout', {
+        const response = await fetch('/general/logout', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'

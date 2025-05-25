@@ -27,7 +27,7 @@ export async function revisarTipoUsuario(username) {
             .input('inUsername', sql.VarChar(64), username)
             .output('outResultCode', sql.Int)
             .execute('RevisarTipoUsuario');
-            console.log(resultado.recordset[0]);
+
             return resultado.recordset[0].Nombre;
         
     } catch (err) {

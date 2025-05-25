@@ -57,7 +57,7 @@ async function loginCorrecto(){
         if(tipoUser == 'Administrador'){
             window.location.href = 'http://localhost:3300/principalAdmin/ventanaPrincipalAdmin';
         }else {
-            window.location.href = 'http://localhost:3300/principalEmpleado/EmpleadoPrincipal'; 
+            window.location.href = 'http://localhost:3300/empleado/ventanaPrincipalEmpleado'; 
         }
     } catch (error) {
         console.error('Error:', error);
