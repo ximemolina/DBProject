@@ -1,39 +1,6 @@
 import sql from 'mssql';
 import { conectarDB } from "../config/database.js";
 
-// Ejecuta el sp para registrar el evento de logout
-export async function logout(username,IpAdress){
-    try {
-        let pool = await conectarDB();
-        let resultado = await pool.request()
-            .input('inUsername', sql.VarChar(64), username)
-            .input('inIpAdress', sql.VarChar(64), IpAdress)
-            .output('outResultCode', sql.Int)
-            .execute('Logout');
-
-            return resultado.output.outResultCode;
-        
-    } catch (err) {
-        console.error('Error ejecutando el SP:', err)
-    }      
-};
-
-async function pruebaLogout() {
-    try {
-        const username = "Goku";
-        const ipAddress = "192.168.1.100";
-
-        const resultado = await logout(username, ipAddress);
-        console.log("Código de resultado:", resultado);
-    } catch (error) {
-        console.error("Error en la prueba de logout:", error);
-    }
-}
-
-// Ejecutar la prueba
-pruebaLogout();
-
-
 // Ejecuta el sp para listar a todos los empleados activos
 export async function listarEmpleados() {
     try {

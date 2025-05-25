@@ -1,4 +1,4 @@
-import * as functionsDB from '../model/errorDB.js'
+import * as functionsDB from '../model/generalDB.js'
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
@@ -14,4 +14,11 @@ export const getError = async (req,res) => {
     const {codigo} = req.body;
     const resultado = await functionsDB.mostrarDescripcion(codigo);
     res.json({resultado});
+};
+
+// Controlador para registrar el evento de logout
+export const logout = async (req,res) => {
+    const {username,ipAdress} = req.body;
+    const resultado = await functionsDB.logout(username,ipAdress);
+    res.json({resultado})
 };
