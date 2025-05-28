@@ -2,9 +2,9 @@ import sql from 'mssql';
 import fs from "fs";
 import * as dotenv from 'dotenv';
 
-dotenv.config();
+dotenv.config();  //uso de variables de entorno
 
-const xmlPath = process.env.rutaCatalogo;
+const xmlPath = process.env.rutaSimulacion;
 
 const config ={
     server: process.env.server,
@@ -40,9 +40,9 @@ async function enviarXML() { //ejecuta sp para cargar datos catalogo de xml a ta
         let resultado = await pool.request()
             .input('inArchivoXML', sql.NVarChar(sql.MAX), xmlContent)
             .output('outResultCode', sql.Int)
-            .execute('CargarDatos');
+            .execute('CargaSimulacion');
         
-        console.log(resultado.output)
+        console.log(resultado.output);
         console.log("XML enviado y procesado en SQL Server.");
         await sql.close();
     } catch (err) {
