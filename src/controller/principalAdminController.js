@@ -11,13 +11,6 @@ export const principalAdminFile = async (req, res) => {
     res.sendFile(path.join(__dirname, '../views/principalAdmin.html'));
 };
 
-// Controlador para registrar el evento de logout
-export const logout = async (req,res) => {
-    const {username,ipAdress} = req.body;
-    const resultado = await principalAdminFunctions.logout(username,ipAdress);
-    res.json({resultado})
-};
-
 // Controlador para enviar la tabla del BD como HTML
 export const listarEmpleados = async (req,res) => {
     const tabla = await principalAdminFunctions.listarEmpleados();

@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import generalRoutes from './generalRoutes.js';
 import principalAdminRoutes from './principalAdminRoutes.js';
+import empleadoRoutes from './empleadoRoutes.js';
 import loginRoutes from './loginRoutes.js';
 import modificarEmpleado from './modificarEmpleadoRoutes.js';
 
@@ -12,6 +13,7 @@ const rutas_init = () => {
   router.use('/modificarEmpleado', modificarEmpleado);
   router.use('/login', loginRoutes);
   router.use('/general', generalRoutes);
+  router.use('/empleado', empleadoRoutes);
 
   return router
 }
