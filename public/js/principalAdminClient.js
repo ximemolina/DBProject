@@ -108,11 +108,12 @@ async function eliminar(){
     }
 }
 
+//Modifica datos del empleado
 function modificar(){
     const empleado = localStorage.getItem('empleado');
     if (empleado) {
         try {
-            window.location.href = 'http://localhost:3300/modificar/ventanaModificar'; // Redirige a la nueva página
+            window.location.href = 'http://localhost:3300/modificarEmpleado/ventanaModificar'; // Redirige a la nueva página
         } catch (error) {
             console.error('Error:', error);
         }
@@ -194,7 +195,7 @@ function assignEvtCheckbox() {
             });
             let empleadoSeleccionado = obtenerFilaSeleccionada();
             if (empleadoSeleccionado) {
-                localStorage.setItem('empleado', JSON.stringify({nombre: empleadoSeleccionado[1]}));
+                localStorage.setItem('empleado', JSON.stringify({nombre: empleadoSeleccionado[0]}));
             }
             console.log("Local storage", localStorage.getItem('empleado'));
             return empleadoSeleccionado;
