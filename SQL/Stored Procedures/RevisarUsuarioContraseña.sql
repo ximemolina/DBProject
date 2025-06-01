@@ -1,7 +1,7 @@
 ﻿USE [DBProject]
 GO
 
-/****** Object:  StoredProcedure [dbo].[RevisarUsuarioContrasena]    Script Date: 21/5/2025 20:37:42 ******/
+/****** Object:  StoredProcedure [dbo].[RevisarUsuarioContrasena]    Script Date: 31/5/2025 21:43:59 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -30,7 +30,7 @@ BEGIN
 		IF NOT EXISTS ( SELECT 1 FROM dbo.Usuario A WHERE A.Nombre = @inUsername )
 		BEGIN
 
-			SET @IdPostByUser = 0;---Asigna id por default de user "no conocido"
+			SET @IdPostByUser = 5;---Asigna id por default de user "no conocido"
 			SET @outResultCode = 50002; ---Contraseña no existe
 			SET @Descripcion = 'Username: No Conocido, Resultado: No Exitoso'
 
