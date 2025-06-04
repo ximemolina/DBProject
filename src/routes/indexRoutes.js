@@ -4,6 +4,7 @@ import principalAdminRoutes from './principalAdminRoutes.js';
 import empleadoRoutes from './empleadoRoutes.js';
 import loginRoutes from './loginRoutes.js';
 import modificarEmpleado from './modificarEmpleadoRoutes.js';
+import eliminarEmpleadoRoutes from './eliminarEmpleadoRoutes.js';
 
 const rutas_init = () => {
   const router = Router()
@@ -14,6 +15,7 @@ const rutas_init = () => {
   router.use('/login', loginRoutes);
   router.use('/general', generalRoutes);
   router.use('/empleado', empleadoRoutes);
+  router.use('/eliminarEmpleado', eliminarEmpleadoRoutes);
 
   return router
 }

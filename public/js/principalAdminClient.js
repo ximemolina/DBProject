@@ -54,7 +54,7 @@ async function filtrarEmpleados() {
     
 }
 
-//Inserta un nuevo empleado
+//Inserta un nuevo empleado*****************************
 function insertar(){
     try {
         window.location.href = 'http://localhost:3300/insertar/ventanaInsertar'; // Redirige a la nueva página
@@ -89,20 +89,42 @@ async function eliminar(){
     const empleado = localStorage.getItem('empleado');
     if (empleado) {
         const parsedEmpleado = JSON.parse(empleado);
-    const nombreEmpleado = parsedEmpleado.nombre;
+        const nombre = parsedEmpleado.nombre;
 
-    let docId = await getDocumentoIdentidad(nombreEmpleado); 
+        try {
+            const response = await fetch('/modificarEmpleado/datosEmpleado', {
+                method: 'POST',
+                headers: {
+                'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ nombre })
+            });
+            const data = await response.json();
+            const tipoDocId = data.datos.TipoDocId;
+            const docId = data.datos.DocId;
+            const puesto = data.datos.Puesto;
+            const departamento = data.datos.Departamento;
 
-    let respuesta = window.confirm('Valor Documento Identidad: '
-                                    + docId 
-                                    + '\nNombre: '
-                                    + nombreEmpleado 
-                                    +'\n¿Está seguro de eliminar este empleado?');
-    if (respuesta === true) {
-        eliminarAfirmado(username,ipAdress,nombreEmpleado); 
-    } else { 
-        eliminarCancelado(username,ipAdress,nombreEmpleado);
-    }
+            let respuesta = window.confirm('Nombre: '
+                                        + nombre 
+                                        + '\n'
+                                        + tipoDocId
+                                        + ': '
+                                        + docId
+                                        + '\nPuesto: '
+                                        + puesto
+                                        + '\nDepartamento: '
+                                        + departamento 
+                                        +'\n¿Está seguro de eliminar este empleado?');
+            if (respuesta === true) {
+                eliminarAfirmado(username,ipAdress,nombre); 
+            } else { 
+                /*eliminarCancelado(username,ipAdress,nombreEmpleado);*/
+                window.alert(`Se ha cancelado la eliminación del empleado ${nombre}`);
+            }
+        } catch (error) {
+        console.log("No se pudo hacer consulta", error);
+        }
     } else {
         window.alert("Debe seleccionar a un empleado");
     }
@@ -227,7 +249,7 @@ function obtenerFilaSeleccionada() {
 //Modificar atributo 'EsActivo' del empleado en la BD por 0 para eliminarlo
 async function eliminarAfirmado(username,IpAdress,nombre){
     try {
-        const response = await fetch('/principal/eliminarEmpleado', {
+        const response = await fetch('/eliminarEmpleado/eliminarEmpleado', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -236,7 +258,7 @@ async function eliminarAfirmado(username,IpAdress,nombre){
             });
           
         const data = await response.json();
-        alert('EL empleado ha sido eliminado');
+        alert(`El empleado ${nombre} ha sido eliminado`);
         listarEmpleados();
     } catch (error) {
         alert('Error calling SP: ' + error);

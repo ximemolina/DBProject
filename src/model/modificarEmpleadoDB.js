@@ -104,37 +104,3 @@ export async function modificarEmpleado(nombreActual, nuevoNombre, nuevoTipoDocI
           console.error('Error ejecutando el SP ModificarEmpleado:', error)
       }
 }
-
-/*async function probarModificarEmpleado() {
-    try {
-        const nombreActual = "Karen Clark";
-        const nuevoNombre = "Karen Clarks";
-        const nuevoTipoDocId = "Cedula Nacional";
-        const nuevoDocId = "3-327-951";
-        const nuevaFechaNac = "1989-12-19";
-        const nuevoPuesto = "Electricista";
-        const nuevoDepartamento = "Bodega de producto terminado";
-        const username = "Goku";
-        const ipAdress = "192.168.1.100";
-
-        const response = await modificarEmpleado(
-            nombreActual, nuevoNombre, nuevoTipoDocId,
-            nuevoDocId, nuevaFechaNac, nuevoPuesto,
-            nuevoDepartamento, username, ipAdress
-        );
-
-        const outResultCode = response[0];
-        console.log(outResultCode);
-
-        if (outResultCode === 0) {
-            console.log("Empleado modificado exitosamente.");
-        } else {
-            console.error("Error al modificar el empleado.");
-        }
-    } catch (error) {
-        console.error("Error en la prueba de modificación:", error);
-    }
-}
-
-// Ejecutar la función de prueba
-probarModificarEmpleado();*/
