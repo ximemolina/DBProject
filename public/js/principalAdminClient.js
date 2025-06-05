@@ -117,7 +117,7 @@ async function eliminar(){
                                         + departamento 
                                         +'\n¿Está seguro de eliminar este empleado?');
             if (respuesta === true) {
-                eliminarAfirmado(username,ipAdress,nombre); 
+                eliminarAfirmado(username,ipAdress,docId,nombre); 
             } else { 
                 /*eliminarCancelado(username,ipAdress,nombreEmpleado);*/
                 window.alert(`Se ha cancelado la eliminación del empleado ${nombre}`);
@@ -247,14 +247,14 @@ function obtenerFilaSeleccionada() {
 }
 
 //Modificar atributo 'EsActivo' del empleado en la BD por 0 para eliminarlo
-async function eliminarAfirmado(username,IpAdress,nombre){
+async function eliminarAfirmado(username,IpAdress,docId,nombre){
     try {
         const response = await fetch('/eliminarEmpleado/eliminarEmpleado', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({nombre,username,IpAdress})
+            body: JSON.stringify({docId,username,IpAdress})
             });
           
         const data = await response.json();

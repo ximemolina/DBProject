@@ -1,12 +1,12 @@
 import sql from 'mssql';
 import { conectarDB } from "../config/database.js";
 
-export async function eliminarEmpleado(nombre,username,ipAdress){
+export async function eliminarEmpleado(docId,username,ipAdress){
     try {
         let pool = await conectarDB();
 
         let resultado = await pool.request()
-            .input('inNombre', sql.VarChar(64), nombre)
+            .input('inDocId', sql.VarChar(64), docId)
             .input('inUsername', sql.VarChar(64), username)
             .input('inIpAdress', sql.VarChar(64), ipAdress)
             .output('outResultCode', sql.Int)
