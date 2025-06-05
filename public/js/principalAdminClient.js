@@ -160,7 +160,7 @@ function consultar(){
 }
 
 function impersonarEmpleado() {
-    
+    window.location.href = 'http://localhost:3300/empleado/ventanaPrincipalEmpleado'; 
 }
 
 /////////////////////////// FUNCIONES AUXILIARES ///////////////////////////
