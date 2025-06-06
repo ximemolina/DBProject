@@ -57,7 +57,7 @@ async function filtrarEmpleados() {
 //Inserta un nuevo empleado*****************************
 function insertar(){
     try {
-        window.location.href = 'http://localhost:3300/insertar/ventanaInsertar'; // Redirige a la nueva página
+        window.location.href = 'http://localhost:3300/insertarEmpleado/ventanaInsertar'; // Redirige a la nueva página
     } catch (error) {
         console.error('Error:', error);
     }

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pantalla de Gestión</title>
+    <link href="/css/style.css" rel="stylesheet">
+    <script src="/js/insertarEmpleadoClient.js" defer></script>
+  </head>
+
+<body class="flex h-screen items-center justify-center bg-gray-100">
+  <div id="datosModificar" class="m-9 flex w-[800px] flex-col place-self-center rounded-2xl bg-[#ffffff] shadow-xl overflow-auto h-screen">
+    <!-- Encabezado -->
+    <div class="rounded-t-2xl bg-blue-800 p-6 text-2xl font-bold text-white">Inserción de nuevo empleado</div>
+
+    <!-- Información de consulta -->
+    <div class="flex flex-col pt-8 pr-8 pl-8">
+      <!-- Nombre -->
+      <div class="mb-2.5 text-lg font-bold text-[#374151]">Nombre:</div>
+      <input id="NombreEmpleado" placeholder="Nombre" autocomplete="off" class="rounded-lg border border-[#cccccc] bg-[#ffffff] px-4 py-2 text-lg text-[#000000] focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-[#aaaaaa]" />
+
+      <!-- Tipo Documento de Identidad -->
+      <div id="TipoDocId" class="mt-2.5 mb-2.5 text-lg font-bold text-[#374151]">Tipo documento de identidad:</div>
+      <div class="relative inline-block text-left">
+        <div>
+          <button id="btnMenuTipoDocId" type="button" class="inline-flex w-2xs items-center justify-between gap-x-1.5 rounded-md bg-white px-3 py-2 text-lg font-semibold text-gray-900 ring-1 ring-gray-300 ring-inset hover:bg-gray-50" aria-expanded="true" aria-haspopup="true">
+            <div id="SeleccionTipoDocId">Seleccionar tipo</div>
+            <svg class="ml-auto size-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+              <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+            </svg>
+          </button>
+        </div>
+        <div id="DropdownTipoDocId" class="z-10 mt-2 hidden h-28 w-2xs origin-top-right overflow-auto rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-hidden" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
+          <!-- Aquí se generarán las opciones dinámicamente -->
+        </div>
+      </div>
+
+      <!-- Documento de Identidad -->
+      <div class="mt-2.5 mb-2.5 text-lg font-bold text-[#374151]">Documento de identidad:</div>
+      <input id="DocumentoIdentidad" placeholder="Documento identidad" autocomplete="off" class="rounded-lg border border-[#cccccc] bg-[#ffffff] px-4 py-2 text-lg text-[#000000] focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-[#aaaaaa]" />
+
+      <!-- Fecha nacimiento -->
+      <div class="flex w-2xs flex-col space-y-2">
+        <label for="fecha" class="mt-2.5 mb-2.5 text-lg font-bold text-[#374151]">Fecha de nacimiento:</label>
+        <input type="date" id="FechaNacimiento" name="fecha" class="w-full rounded-md border border-gray-300 px-3 py-2 text-lg text-gray-700 shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none" placeholder="yyyy/mm/dd" />
+      </div>
+
+      <!-- Puesto -->
+      <div id="Puesto" class="mt-2.5 mb-2.5 text-lg font-bold text-[#374151]">Puesto:</div>
+      <div class="relative inline-block text-left">
+        <div>
+          <button id="btnMenuPuesto" type="button" class="inline-flex w-2xs items-center justify-between gap-x-1.5 rounded-md bg-white px-3 py-2 text-lg font-semibold text-gray-900 ring-1 ring-gray-300 ring-inset hover:bg-gray-50" aria-expanded="true" aria-haspopup="true">
+            <div id="SeleccionPuesto">Seleccionar puesto</div>
+            <svg class="ml-auto size-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+              <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+            </svg>
+          </button>
+        </div>
+        <div id="DropdownPuesto" class="z-10 mt-2 hidden h-28 w-2xs origin-top-right overflow-auto rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-hidden" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
+          <!-- Aquí se generarán las opciones dinámicamente -->
+        </div>
+      </div>
+
+      <!-- Departamento -->
+      <div id="Departamento" class="mt-2.5 mb-2.5 text-lg font-bold text-[#374151]">Departamento:</div>
+      <div class="relative inline-block text-left">
+        <div>
+          <button id="btnMenuDepartamento" type="button" class="inline-flex w-auto items-center justify-between gap-x-1.5 rounded-md bg-white px-3 py-2 text-lg font-semibold text-gray-900 ring-1 ring-gray-300 ring-inset hover:bg-gray-50" aria-expanded="true" aria-haspopup="true">
+            <div id="SeleccionDepartamento">Seleccionar departamento</div>
+            <svg class="ml-auto size-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+              <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+            </svg>
+          </button>
+        </div>
+        <div id="DropdownDepartamento" class="z-10 mt-2 hidden h-28 w-2xs origin-top-right overflow-auto rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-hidden" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
+          <!-- Aquí se generarán las opciones dinámicamente -->
+        </div>
+      </div>
+
+      <!-- Credenciales -->
+      <div class="mb-2.5 text-lg font-bold text-[#374151] mt-3.5">Usuario:
+        <input id="Usuario" placeholder="Usuario" autocomplete="off" class="rounded-lg border border-[#cccccc] bg-[#ffffff] px-4 py-2 text-lg text-[#000000] focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-[#aaaaaa] ml-10 w-2xs" />
+      </div>
+
+      <div class="mb-2.5 text-lg font-bold text-[#374151] mt-3.5">Contraseña:
+        <input id="Contraseña" placeholder="Contraseña" autocomplete="off" class="rounded-lg border border-[#cccccc] bg-[#ffffff] px-4 py-2 text-lg text-[#000000] focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-[#aaaaaa] ml-3 w-2xs" />
+      </div>
+    <!-- Botones -->
+    <div class="flex justify-end pt-6">
+      <button id="btnCancelar" class="mr-8 mb-8 transform rounded-lg bg-red-700 p-3 text-base font-bold text-[#ffffff] transition-transform hover:bg-red-600 active:scale-95">Cancelar</button>
+      <button id="btnInsertar" class="mr-8 mb-8 transform rounded-lg bg-[#2856b3] p-3 text-base font-bold text-[#ffffff] transition-transform hover:bg-blue-700 active:scale-95">Insertar</button>
+    </div>
+  </div>
+</body>
+</html>

@@ -253,8 +253,14 @@
   .mb-10 {
     margin-bottom: calc(var(--spacing) * 10);
   }
+  .ml-3 {
+    margin-left: calc(var(--spacing) * 3);
+  }
   .ml-3\.5 {
     margin-left: calc(var(--spacing) * 3.5);
+  }
+  .ml-10 {
+    margin-left: calc(var(--spacing) * 10);
   }
   .ml-96 {
     margin-left: calc(var(--spacing) * 96);
