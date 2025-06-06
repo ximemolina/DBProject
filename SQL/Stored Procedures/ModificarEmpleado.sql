@@ -28,10 +28,10 @@ BEGIN
 		DECLARE @IdNuevoPuesto INT;
 		DECLARE @IdDepartamento INT;
 		DECLARE @IdNuevoDepartamento INT;
-		DECLARE @nombreValido BIT = 1;			--True
-		DECLARE @nombreRepetido BIT = 0;		--False
-		DECLARE @documentoIdentidadValido BIT = 1;		--True
-		DECLARE @documentoIdentidadRepetido BIT = 0;	--False
+		DECLARE @FNombreValido BIT = 1;			--True
+		DECLARE @FNombreRepetido BIT = 0;		--False
+		DECLARE @FDocumentoIdentidadValido BIT = 1;		--True
+		DECLARE @FDocumentoIdentidadRepetido BIT = 0;	--False
 
 		SET @inNuevoNombre = LTRIM( RTRIM( @inNuevoNombre ) );
 		SET @inNuevoDocId = LTRIM( RTRIM( @inNuevoDocId ) );
@@ -120,11 +120,11 @@ BEGIN
 		IF PATINDEX( '%[^A-Za-z ]%', @inNuevoNombre ) > 0 OR @inNuevoNombre = ''
 		BEGIN 
 			SET @outResultCode = 50009;		--Nombre no alfabetico
-			SET @nombreValido = 0;
+			SET @FNombreValido = 0;
 		END;
 
 		--VALIDAR SI NOMBRE EXISTE
-		IF @nombreValido = 1 AND 
+		IF @FNombreValido = 1 AND 
 			EXISTS ( 
 				SELECT 1 
 				FROM dbo.Empleado AS E 
@@ -132,22 +132,22 @@ BEGIN
 				E.ValorDocumentoIdentidad != @ValorDocId)
 		BEGIN 
 			SET @outResultCode = 50007		--Nombre ya existe
-			SET @nombreRepetido = 1;
+			SET @FNombreRepetido = 1;
 		END;
 
 		--VALIDAR SI FORMATO DOCUMENTO IDENTIDAD ES VALIDO
-		IF @nombreValido = 1 AND 
-			@nombreRepetido = 0 AND
+		IF @FNombreValido = 1 AND 
+			@FNombreRepetido = 0 AND
 			PATINDEX( '%[^0-9-]%', @inNuevoDocId ) > 0 OR @inNuevoDocId = ''
 		BEGIN
 			SET @outResultCode = 50010		--Documento de identidad invalido
-			SET @documentoIdentidadValido = 0;
+			SET @FDocumentoIdentidadValido = 0;
 		END;
 
 		--VALIDAR SI DOCUMENTO IDENTIDAD EXISTE
-		IF @nombreValido = 1 AND 
-			@nombreRepetido = 0 AND
-			@documentoIdentidadValido = 1 AND
+		IF @FNombreValido = 1 AND 
+			@FNombreRepetido = 0 AND
+			@FDocumentoIdentidadValido = 1 AND
 			EXISTS ( 
 				SELECT 1 
 				FROM dbo.Empleado AS E 
@@ -156,7 +156,7 @@ BEGIN
 				E.IdTipoValorDocIdentidad = @IdNuevoTipoDocId)
 		BEGIN
 			SET @outResultCode = 50006		--Documento identidad ya existe
-			SET @documentoIdentidadRepetido = 1;
+			SET @FDocumentoIdentidadRepetido = 1;
 		END;
 
 		SET @DescripcionError = ( SELECT
@@ -187,10 +187,10 @@ BEGIN
 			);
 
 			--Actualiza los datos
-			IF @nombreValido = 1 AND 
-				@nombreRepetido = 0 AND
-				@documentoIdentidadValido = 1 AND
-				@documentoIdentidadRepetido = 0
+			IF @FNombreValido = 1 AND 
+				@FNombreRepetido = 0 AND
+				@FDocumentoIdentidadValido = 1 AND
+				@FDocumentoIdentidadRepetido = 0
 			BEGIN 
 				UPDATE 
 					E
