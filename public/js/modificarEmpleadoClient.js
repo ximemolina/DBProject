@@ -116,8 +116,9 @@ async function modificarEmpleado(params) {
         const nuevaFechaNac = (NuevaFechaNacimiento.value).trim();
         const nuevoPuesto = SeleccionPuesto.textContent;
         const nuevoDepartamento = SeleccionDepartamento.textContent;
-        console.log('fehca', nuevaFechaNac);
-        const response = await fetch('/modificarEmpleado/modificarEmpleado', {
+        console.log('fecha', nuevaFechaNac);
+        if (nuevoNombre != "" && nuevoDocId != "") {
+            const response = await fetch('/modificarEmpleado/modificarEmpleado', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
@@ -125,19 +126,23 @@ async function modificarEmpleado(params) {
             body: JSON.stringify({ nombreActual, nuevoNombre, nuevoTipoDocId, nuevoDocId,
                                 nuevaFechaNac, nuevoPuesto, nuevoDepartamento, username, 
                                 ipAdress })
-        });
+            });
 
-        const data = await response.json();
-        const code = data.outResultCode;
-        console.log('Codigo resultado: ', code);
+            const data = await response.json();
+            const code = data.outResultCode;
+            console.log('Codigo resultado: ', code);
 
-        if (code > 0) {
-            descripcionError(code);
+            if (code > 0) {
+                descripcionError(code);
+            }
+            else {
+                alert('Los datos del empleado han sido modificados exitosamente');
+
+                regresarPrincipal();
+            }
         }
         else {
-            alert('Los datos del empleado han sido modificados exitosamente');
-
-            regresarPrincipal();
+            window.alert('Debe llenar todos los espacions');
         }
         
     } catch (error) {
