@@ -87,7 +87,7 @@ async function insertarEmpleado(params) {
                 descripcionError(code);
             }
             else {
-                alert('Los datos del empleado han sido modificados exitosamente');
+                alert('Se ha incluido el nuevo empleado exitosamente');
 
                 regresarPrincipal();
             }
@@ -97,7 +97,7 @@ async function insertarEmpleado(params) {
         }
         
     } catch (error) {
-        console.log("No se pudo hacer modificacion", error);
+        console.log("No se pudo hacer insercion", error);
     }
 }
         
