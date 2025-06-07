@@ -15,4 +15,10 @@ router.get('/ventanaMes', empleadoController.ConsultaMesFile);
 //ruta para ir a ventana de consultar planilla semana
 router.get('/ventanaSemana', empleadoController.ConsultaSemanaFile);
 
+//desplegar informacion de planilla mensual
+router.post('/listarPlanillaMes', empleadoController.listarPlanillaMes);
+
+//desplegar desglose de deducciones mensuales
+router.post('/desplegarDeducciones', empleadoController.desplegarDeducciones);
+
 export default router;

@@ -18,9 +18,22 @@ export const ConsultaSemanaFile = async (req, res) => {
     res.sendFile(path.join(__dirname, '../views/consultarSemana.html')); //sirve el html de consulta de semana
 };
 
-// Controlador para registrar el evento de logout
 export const regresarAdmin = async (req,res) => {
     const {username,ipAdress} = req.body;
     const resultado = await functionsDB.regresarAdmin(username,ipAdress);
     res.json({resultado})
+};
+
+export const listarPlanillaMes = async (req,res) => {
+    const {username,ipAdress} = req.body;
+    const resultado = await functionsDB.listarMes(username,ipAdress);
+    const tabla = functionsDB.setearTabla(resultado);
+    res.json({tabla})
+};
+
+export const desplegarDeducciones = async (req,res) => {
+    const {username,idMes} = req.body;
+    const resultado = await functionsDB.desplegarDeducciones(username,idMes);
+    const tabla = functionsDB.setearDesglose(resultado[0],resultado[1]);
+    res.json({tabla})
 };

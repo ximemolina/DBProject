@@ -29,7 +29,7 @@ export function generarTabla(tabla) {
                 <td class="border border-gray-200 p-4 py-1 text-center font-bold">SELECCIONAR</td>
                     </tr>
                 </thead>
-                <tbody class="bg-[#FFFFFF] bg-white text-[#6b7280] text-gray-500" style="background-color: #FFFFFF; color: #6b7280;">
+                <tbody class=" bg-white text-gray-500" style="background-color: #FFFFFF; color: #6b7280;">
     `;
 
     tabla.forEach(item => {
