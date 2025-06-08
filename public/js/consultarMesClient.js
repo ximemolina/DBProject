@@ -12,7 +12,7 @@ const username = parsedUser.username
 const ipAdress = parsedUser.IP
 
 btnRegresar.addEventListener("click", regresarMain);
-//tablaDeducciones.addEventListener('click', mostrarDeducciones);
+
 
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -73,6 +73,7 @@ async function mostrarDeducciones(idMes){
     },
     body: JSON.stringify({username,idMes})
   });
+        console.error(username)
   const data = await response.json();
   const modal = document.getElementById("modal-deducciones");
   const modalContenedor = document.getElementById("modal-contenedor");

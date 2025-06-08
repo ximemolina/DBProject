@@ -21,4 +21,13 @@ router.post('/listarPlanillaMes', empleadoController.listarPlanillaMes);
 //desplegar desglose de deducciones mensuales
 router.post('/desplegarDeducciones', empleadoController.desplegarDeducciones);
 
+//desplegar informacion de planilla semanal
+router.post('/listarPlanillaSemana', empleadoController.listarPlanillaSemana);
+
+//desplegar desglose de deducciones semanales
+router.post('/desplegarDeduccionesSemana', empleadoController.desplegarDeduccionesSemana);
+
+//desplegar informacion sobre salarios
+router.post('/desplegarSalario', empleadoController.desplegarSalario);
+
 export default router;

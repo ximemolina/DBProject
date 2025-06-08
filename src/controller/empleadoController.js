@@ -27,7 +27,7 @@ export const regresarAdmin = async (req,res) => {
 export const listarPlanillaMes = async (req,res) => {
     const {username,ipAdress} = req.body;
     const resultado = await functionsDB.listarMes(username,ipAdress);
-    const tabla = functionsDB.setearTabla(resultado);
+    const tabla = functionsDB.setearTablaMes(resultado);
     res.json({tabla})
 };
 
@@ -35,5 +35,26 @@ export const desplegarDeducciones = async (req,res) => {
     const {username,idMes} = req.body;
     const resultado = await functionsDB.desplegarDeducciones(username,idMes);
     const tabla = functionsDB.setearDesglose(resultado[0],resultado[1]);
+    res.json({tabla})
+};
+
+export const listarPlanillaSemana = async (req,res) => {
+    const {username,ipAdress} = req.body;
+    const resultado = await functionsDB.listarSemana(username,ipAdress);
+    const tabla = functionsDB.setearTablaSemana(resultado);
+    res.json({tabla})
+};
+
+export const desplegarDeduccionesSemana = async (req,res) => {
+    const {username,idSemana} = req.body;
+    const resultado = await functionsDB.desplegarDeduccionesSemana(username,idSemana);
+    const tabla = functionsDB.setearDesglose(resultado[0],resultado[1]);
+    res.json({tabla})
+};
+
+export const desplegarSalario = async (req,res) => {
+    const {username,idSemana} = req.body;
+    const resultado = await functionsDB.desplegarSalarioSemana(username,idSemana);
+    const tabla = functionsDB.setearDesgloseSalario(resultado[0]);
     res.json({tabla})
 };

@@ -10,6 +10,18 @@
     <div class="mt-3.5 ml-3.5">
         <button id="btnRegresar" class="font-bold rounded-lg text-xl  w-32 h-8 bg-[#000000] text-[#ffffff] justify-center hover:bg-gray-800">REGRESAR</button>
     </div> 
-
+    <div id = 'contenedor-tabla' class = "ml-4 mr-4 mu-5"></div>
+<!-- Modal de Desglose -->
+<div id="modal-deducciones" class="fixed inset-0 hidden items-center justify-center z-50">
+  <div id="modal-contenedor" class="bg-white w-full max-w-6xl max-h-[80vh] rounded-lg shadow-lg p-6 relative overflow-auto cursor-move">
+    <!-- Barra para mover el modal -->
+    <div id="modal-barra" class="w-full flex justify-between items-center cursor-move pb-2 border-b border-gray-300">
+      <h2 class="text-lg font-semibold text-gray-800">Desglose de Deducciones</h2>
+      <button id="cerrar-modal" class="text-gray-600 hover:text-black text-xl">&times;</button>
+    </div>
+    <!-- Contenido de la tabla -->
+    <div id="contenido-modal" class="mt-4"></div>
+  </div>
+</div> 
 </body> 
 </html>
