@@ -1,19 +1,22 @@
 USE [DBProject]
 GO
 
-/****** Object:  View [dbo].[VistaEmpleadoXSemana]    Script Date: 6/6/2025 20:00:48 ******/
+/****** Object:  View [dbo].[VistaEmpleadoXSemana]    Script Date: 8/6/2025 12:40:59 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE VIEW [dbo].[VistaEmpleadoXSemana]
+
+
+ALTER   VIEW [dbo].[VistaEmpleadoXSemana]
 AS
 
 	SELECT
 		M.id AS IdMes
-		,E.id AS IdEmpleado
+		,S.id AS IdSemana
+		,ESP.idEmpleado AS IdEmpleado
 		,ESP.SalarioBruto AS SalarioBruto
 		,ESP.SumaDeducciones AS TotalDeducciones
 		,ESP.SalarioBruto - ESP.SumaDeducciones AS SalarioNeto
@@ -21,8 +24,6 @@ AS
 		DBO.EmpleadoXSemanaPlanilla AS ESP
 	INNER JOIN DBO.SemanaPlanilla AS S
 	ON ESP.idSemanaPlanilla = S.id
-	INNER JOIN DBO.Empleado AS E
-	ON ESP.idEmpleado = E.id
 	INNER JOIN DBO.MesPlanilla AS M
 	ON S.idMesPlanilla = M.id
 
