@@ -15,7 +15,7 @@ AS
 BEGIN
     SET NOCOUNT ON;
 	BEGIN TRY
-		DECLARE @IdTipoEvento INT = 5; ---Insercion eMPLEADO
+		DECLARE @IdTipoEvento INT = 5; ---Insercion Empleado
 		DECLARE @IdPostByUser INT; ---Id Usuario que está realizando el evento
 		DECLARE @Descripcion VARCHAR( 1024 ); ---Descripción de Evento Ocurrido
 		DECLARE @DescripcionError VARCHAR( 1024 );
@@ -23,6 +23,7 @@ BEGIN
 		DECLARE @TipoDocId VARCHAR( 64 );
 		DECLARE @idPuesto INT;
 		DECLARE @Departamento VARCHAR( 64 );
+		DECLARE @ultIdUsuario INT;
 		DECLARE @FUsuarioValido INT = 1;			--True
 		DECLARE @FNombreValido BIT = 1;			--True
 		DECLARE @FNombreRepetido BIT = 0;		--False
@@ -69,6 +70,10 @@ BEGIN
 							+ CONVERT( VARCHAR(64), @inUsuario )
 							+ '. Password: '
 							+ CONVERT( VARCHAR(64), @inPassword ) );
+		SET @ultIdUsuario = ( SELECT
+									MAX(U.id)
+								FROM	
+									dbo.Usuario AS U ) + 1;
 		SET @outResultCode = 0;
 		
 		--VALIDAR SI USUARIO YA EXISTE
@@ -168,12 +173,14 @@ BEGIN
 
 				--INSERTAR TABLA USUARIO
 				INSERT INTO dbo.Usuario (
-					Nombre,
-					Contraseña,
-					IdTipoUsuario
+					id
+					, Nombre
+					, Contraseña
+					, IdTipoUsuario
 				)
 				VALUES (
-					@inUsuario
+					@ultIdUsuario
+					, @inUsuario
 					, @inPassword
 					, 2
 				);
@@ -185,6 +192,7 @@ BEGIN
 					, FechaNacimiento
 					, IdPuesto
 					, IdDepartamento
+					, IdUsuario
 					, EsActivo
 				)
 				VALUES (
@@ -194,12 +202,11 @@ BEGIN
 					, @inFechaNac
 					, @idPuesto
 					, @inIdDepartamento
+					, @ultIdUsuario
 					, 1
 				);
-				--ASIGNAR DEDUCCIONES OBLIGATORIAS
+
 			END;
-
-
 		COMMIT TRANSACTION InsertarEmpleado
 	END TRY
 

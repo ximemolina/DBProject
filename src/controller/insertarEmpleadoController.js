@@ -1,7 +1,7 @@
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
-import * as insertarDB from '../model/insertarEmpleadoDB.js'
+import * as insertarDB from '../model/insertarEmpleadoDB.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -14,13 +14,13 @@ export const insertarFile = async (req, res) => {
 //Controlador para insertar nuevo empleado
 export const insertarEmpleado = async (req, res) => {
     try {
-        const { nombreActual, nuevoNombre, nuevoTipoDocId, nuevoDocId,
-                nuevaFechaNac, nuevoPuesto, nuevoDepartamento, username, 
-                ipAdress } = req.body;
+        const { nombre, idTipoDocId, docId, fechaNac, 
+                nombrePuesto, idDepartamento, usuario, 
+                password, username, ipAdress } = req.body;
         const response = await insertarDB.insertarEmpleado(
-                        nombreActual, nuevoNombre, nuevoTipoDocId, nuevoDocId,
-                        nuevaFechaNac, nuevoPuesto, nuevoDepartamento, username, 
-                        ipAdress);
+                        nombre, idTipoDocId, docId, fechaNac, 
+                        nombrePuesto, idDepartamento, usuario, 
+                        password, username, ipAdress);
 
         const outResultCode = response[0];
 

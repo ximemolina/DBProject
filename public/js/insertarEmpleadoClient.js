@@ -12,11 +12,15 @@ const DropdownDepartamento = document.getElementById("DropdownDepartamento");
 const NombreEmpleado = document.getElementById("NombreEmpleado");
 const DocumentoIdentidad = document.getElementById("DocumentoIdentidad");
 const FechaNacimiento = document.getElementById("FechaNacimiento");
+const Usuario = document.getElementById("Usuario");
+const Password = document.getElementById("Password");
 
 const raw = localStorage.getItem('user');
 const parsedUser = JSON.parse(raw);
 const username = parsedUser.username;
 const ipAdress = parsedUser.IP;
+let idTipoDocId = 0;
+let idDepartamento = 0;
 
 btnCancelar.addEventListener('click', regresarPrincipal);
 btnInsertar.addEventListener('click', insertarEmpleado);
@@ -60,23 +64,24 @@ function regresarPrincipal() {
 //Inserta nuevo empleado
 async function insertarEmpleado(params) {
     try {
-        const nombreActual = nombre;
-        const nuevoNombre = (NombreNuevo.value).trim();
-        const nuevoTipoDocId = SeleccionTipoDocId.textContent;
-        const nuevoDocId = (DocumentoIdentidadNuevo.value).trim();
-        const nuevaFechaNac = (NuevaFechaNacimiento.value).trim();
-        const nuevoPuesto = SeleccionPuesto.textContent;
-        const nuevoDepartamento = SeleccionDepartamento.textContent;
-        console.log('fecha', nuevaFechaNac);
-        if (nuevoNombre != "" && nuevoDocId != "") {
-            const response = await fetch('/modificarEmpleado/modificarEmpleado', {
+        const nombre = (NombreEmpleado.value).trim();
+        const docId = (DocumentoIdentidad.value).trim();
+        const fechaNac = (FechaNacimiento.value).trim();
+        const nombrePuesto = SeleccionPuesto.textContent;
+        const usuario = (Usuario.value).trim();
+        const password = (Password.value).trim();
+
+        if (nombre != "" && idTipoDocId != 0 && docId != "" && fechaNac != "" 
+            && nombrePuesto != "Seleccionar puesto" && idDepartamento != 0
+            && usuario != "" && password != "") {
+            const response = await fetch('/insertarEmpleado/insertarEmpleado', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ nombreActual, nuevoNombre, nuevoTipoDocId, nuevoDocId,
-                                nuevaFechaNac, nuevoPuesto, nuevoDepartamento, username, 
-                                ipAdress })
+            body: JSON.stringify({ nombre, idTipoDocId, docId, fechaNac, 
+                                    nombrePuesto, idDepartamento, usuario, 
+                                    password, username, ipAdress })
             });
 
             const data = await response.json();
@@ -191,11 +196,13 @@ function obtenerPuestoSeleccionado() {
 
 //Obtener el valor seleccionado de tipo doc id
 function obtenerTipoDocIdSeleccionado() {
-    document.querySelectorAll('#DropdownTipoDocId a').forEach(item => {
+    document.querySelectorAll('#DropdownTipoDocId a').forEach((item, index) => {
+        item.dataset.id = index + 1; // Asigna un número interno al elemento
         item.addEventListener('click', (event) => {
           event.preventDefault(); // Evita que el enlace recargue la página
+          idTipoDocId = parseInt(event.target.dataset.id, 10);
           const valorSeleccionado = event.target.textContent.trim(); // Obtiene el texto del elemento
-          console.log('Tipo Doc Id seleccionado:', valorSeleccionado);
+          console.log(`ID: ${idTipoDocId}, Nombre: ${valorSeleccionado}`);
           SeleccionTipoDocId.textContent = valorSeleccionado;
           DropdownTipoDocId.classList.toggle('hidden');
         });
@@ -204,16 +211,22 @@ function obtenerTipoDocIdSeleccionado() {
 
 //Obtener el valor seleccionado de departamento
 function obtenerDepartamentoSeleccionado() {
-    document.querySelectorAll('#DropdownDepartamento a').forEach(item => {
+    const elementos = document.querySelectorAll('#DropdownDepartamento a');
+
+    elementos.forEach((item, index) => {
+        item.dataset.id = index + 1; // Asigna un número interno al elemento
+
         item.addEventListener('click', (event) => {
-          event.preventDefault(); // Evita que el enlace recargue la página
-          const valorSeleccionado = event.target.textContent.trim(); // Obtiene el texto del elemento
-          console.log('Departamento seleccionado:', valorSeleccionado);
-          SeleccionDepartamento.textContent = valorSeleccionado;
-          DropdownDepartamento.classList.toggle('hidden');
+            event.preventDefault(); // Evita que el enlace recargue la página
+            idDepartamento = parseInt(event.target.dataset.id, 10); // Obtiene el número asignado
+            const nombreSeleccionado = event.target.textContent.trim(); // Obtiene el nombre visual
+            console.log(`ID: ${idDepartamento}, Nombre: ${nombreSeleccionado}`);
+            SeleccionDepartamento.textContent = nombreSeleccionado; // Muestra el nombre visualmente
+            DropdownDepartamento.classList.toggle('hidden');
         });
     });
 }
+
 
 //Restringe la seleccion de fecha 
 function maxFecha() {
@@ -221,6 +234,6 @@ function maxFecha() {
     const hoy = new Date().toISOString().split('T')[0];
 
     // Establecer el atributo max al input
-    NuevaFechaNacimiento.setAttribute('max', hoy);
+    FechaNacimiento.setAttribute('max', hoy);
 
 }
