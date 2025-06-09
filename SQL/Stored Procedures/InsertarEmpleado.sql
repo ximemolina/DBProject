@@ -85,6 +85,7 @@ BEGIN
 			SET @DescripcionResultado = ( 'Usuario '
 										+ CONVERT( VARCHAR(64), @inUsuario )
 										+ ' ya existe.');
+			SET @outResultCode = -1;
 		END;
 		--VALIDAR SI FORMATO NOMBRE ES VALIDO
 		IF PATINDEX( '%[^A-Za-z ]%', @inNombre ) > 0 OR @inNombre = ''
@@ -138,8 +139,8 @@ BEGIN
 			SET @DescripcionResultado = ( 'Error: '
 										+ CONVERT( VARCHAR(64), @outResultCode )
 										+ ' - '
-										+ CONVERT ( VARCHAR(64), @DescripcionError )
-										+ @DescripcionResultado )
+										+ CONVERT ( VARCHAR(64), @DescripcionError 
+										+ @DescripcionResultado) )
 		END;
 		ELSE
 		BEGIN

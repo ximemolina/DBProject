@@ -50,6 +50,7 @@ window.addEventListener('DOMContentLoaded', () => {
     generarMenuPuesto();
     generarMenuTipoDocId();
     generarMenuDepartamento();
+    maxFecha();
 });
 
 //Para regresar a la pagina principal
@@ -89,7 +90,11 @@ async function insertarEmpleado(params) {
             console.log('Codigo resultado: ', code);
 
             if (code > 0) {
+                console.log("entra");
                 descripcionError(code);
+            }
+            else if (code == -1) {
+                alert('Nombre de usuario ya existe');
             }
             else {
                 alert('Se ha incluido el nuevo empleado exitosamente');
@@ -227,7 +232,6 @@ function obtenerDepartamentoSeleccionado() {
     });
 }
 
-
 //Restringe la seleccion de fecha 
 function maxFecha() {
     // Obtener la fecha actual en formato yyyy-mm-dd
@@ -236,4 +240,19 @@ function maxFecha() {
     // Establecer el atributo max al input
     FechaNacimiento.setAttribute('max', hoy);
 
+}
+
+//Muestra descripcion de error
+async function descripcionError(codigo){
+    const response = await fetch('/general/getError', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ codigo })
+      });
+  
+      const data = await response.json();
+      resultado = data.resultado[0].Descripcion;
+      alert('Error: ' + resultado);
 }
