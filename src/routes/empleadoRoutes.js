@@ -15,8 +15,14 @@ router.get('/ventanaMes', empleadoController.ConsultaMesFile);
 //ruta para ir a ventana de consultar planilla semana
 router.get('/ventanaSemana', empleadoController.ConsultaSemanaFile);
 
+//ruta para ir a ventana de consultar planilla semana
+router.get('/ventanaMovimientos', empleadoController.ConsultaMovimientoFile);
+
 //desplegar informacion de planilla mensual
 router.post('/listarPlanillaMes', empleadoController.listarPlanillaMes);
+
+//desplegar informacion de movimientos
+router.post('/listarMovimientos', empleadoController.listarMovimientos);
 
 //desplegar desglose de deducciones mensuales
 router.post('/desplegarDeducciones', empleadoController.desplegarDeducciones);
@@ -29,5 +35,8 @@ router.post('/desplegarDeduccionesSemana', empleadoController.desplegarDeduccion
 
 //desplegar informacion sobre salarios
 router.post('/desplegarSalario', empleadoController.desplegarSalario);
+
+//desplegar informacion sobre salarios
+router.post('/desgloseMovimientos', empleadoController.desplegarMovs);
 
 export default router;

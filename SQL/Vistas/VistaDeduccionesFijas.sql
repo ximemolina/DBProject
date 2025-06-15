@@ -1,7 +1,7 @@
 USE [DBProject]
 GO
 
-/****** Object:  View [dbo].[VistaDeduccionesFijas]    Script Date: 7/6/2025 13:27:03 ******/
+
 SET ANSI_NULLS ON
 GO
 
@@ -11,10 +11,11 @@ GO
 
 
 
-CREATE VIEW [dbo].[VistaDeduccionesFijas]
+ALTER VIEW [dbo].[VistaDeduccionesFijas]
 AS
 	SELECT
-		D.id AS IdTipoDeduccion
+		E.idEmpleado AS IdEmpleado
+		,D.id AS IdTipoDeduccion
 		,D.Nombre AS Nombre
 		,P.Valor AS Monto
 	FROM
@@ -25,6 +26,7 @@ AS
 	ON N.idEmpleadoXTipoDeduccion = E.id
 	INNER JOIN DBO.EmpleadoXTipoDeduccionNoObligatoriaNoPorcentual AS P
 	ON P.idEmpleadoXTipoDeduccionNoObligatoria = N.idEmpleadoXTipoDeduccion
+
 GO
 
 

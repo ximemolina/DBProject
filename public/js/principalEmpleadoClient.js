@@ -2,6 +2,7 @@ const btnSalir = document.getElementById("btnSalir");
 const btnConsultarMes = document.getElementById("btnConsultarMes");
 const btnConsultarSemana = document.getElementById("btnConsultarSemana");
 const btnRegresarAdmin = document.getElementById("btnRegresarAdmin");
+const btnConsultarMovimientos = document.getElementById("btnConsultarMovimientos");
 
 const raw = localStorage.getItem('user');
 const parsedUser = JSON.parse(raw);
@@ -12,6 +13,7 @@ btnSalir.addEventListener("click", regresarLogin);
 btnConsultarMes.addEventListener("click", consultarMes);
 btnConsultarSemana.addEventListener("click", consultarSemana);
 btnRegresarAdmin.addEventListener("click", regresarAdmin);
+btnConsultarMovimientos.addEventListener("click", consultarMovs);
 
 window.addEventListener('DOMContentLoaded', () => {
     revisarTipoUsuario();
@@ -73,4 +75,9 @@ async function consultarMes(){
 //Desplegar pagina de consulta planilla semanal
 async function consultarSemana(){
     window.location.href = 'http://localhost:3300/empleado/ventanaSemana'; 
+}
+
+//Desplegar pagina de consulta de movimientos
+async function consultarMovs(){
+    window.location.href = 'http://localhost:3300/empleado/ventanaMovimientos'; 
 }

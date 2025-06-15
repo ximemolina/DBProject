@@ -18,6 +18,10 @@ export const ConsultaSemanaFile = async (req, res) => {
     res.sendFile(path.join(__dirname, '../views/consultarSemana.html')); //sirve el html de consulta de semana
 };
 
+export const ConsultaMovimientoFile = async (req, res) => {
+    res.sendFile(path.join(__dirname, '../views/consultarMovimientos.html')); //sirve el html de consulta de semana
+};
+
 export const regresarAdmin = async (req,res) => {
     const {username,ipAdress} = req.body;
     const resultado = await functionsDB.regresarAdmin(username,ipAdress);
@@ -56,5 +60,19 @@ export const desplegarSalario = async (req,res) => {
     const {username,idSemana} = req.body;
     const resultado = await functionsDB.desplegarSalarioSemana(username,idSemana);
     const tabla = functionsDB.setearDesgloseSalario(resultado[0]);
+    res.json({tabla})
+};
+
+export const listarMovimientos = async (req,res) => {
+    const {username} = req.body;
+    const resultado = await functionsDB.listarMovimientos(username);
+    const tabla = functionsDB.setearTablaMovs(resultado);
+    res.json({tabla})
+};
+
+export const desplegarMovs = async (req,res) => {
+    const {idMov,idMovtipo} = req.body;
+    const resultado = await functionsDB.detalleMovs(idMov,idMovtipo);
+    const tabla = functionsDB.setearDesgloseMovimientos(resultado);
     res.json({tabla})
 };

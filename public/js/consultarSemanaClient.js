@@ -17,25 +17,6 @@ window.addEventListener('DOMContentLoaded', () => {
     listarSemana();
   });
 
-barra.addEventListener("mousedown", (e) => {
-  isDragging = true;
-  const rect = modal.getBoundingClientRect();
-  offsetX = e.clientX - rect.left;
-  offsetY = e.clientY - rect.top;
-  modal.style.position = "absolute";
-  modal.style.margin = "0"; // elimina el centrado por márgenes
-});
-
-document.addEventListener("mousemove", (e) => {
-  if (isDragging) {
-    modal.style.left = `${e.clientX - offsetX}px`;
-    modal.style.top = `${e.clientY - offsetY}px`;
-  }
-});
-
-document.addEventListener("mouseup", () => {
-  isDragging = false;
-});
 
 function regresarMain(){
     window.location.href = 'http://localhost:3300/empleado/ventanaPrincipalEmpleado'; //volver a main empleado
@@ -108,7 +89,7 @@ async function mostrarSalario(idSemana){
   const data = await response.json();
   const modal = document.getElementById("modal-deducciones");
   const modalContenedor = document.getElementById("modal-contenedor");
-console.error("revisado3")
+
   document.getElementById("contenido-modal").innerHTML = data.tabla;
   modal.classList.remove("hidden");
 
@@ -119,3 +100,24 @@ console.error("revisado3")
 document.getElementById("cerrar-modal").addEventListener("click", () => {
   document.getElementById("modal-deducciones").classList.add("hidden");
 })
+
+//Funciones de movimiento de PopUp
+barra.addEventListener("mousedown", (e) => {
+  isDragging = true;
+  const rect = modal.getBoundingClientRect();
+  offsetX = e.clientX - rect.left;
+  offsetY = e.clientY - rect.top;
+  modal.style.position = "absolute";
+  modal.style.margin = "0"; // elimina el centrado por márgenes
+});
+
+document.addEventListener("mousemove", (e) => {
+  if (isDragging) {
+    modal.style.left = `${e.clientX - offsetX}px`;
+    modal.style.top = `${e.clientY - offsetY}px`;
+  }
+});
+
+document.addEventListener("mouseup", () => {
+  isDragging = false;
+});
