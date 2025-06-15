@@ -1,10 +1,4 @@
 const btnRegresar = document.getElementById("btnRegresar");
-const tablaDeducciones = document.getElementById("contenedor-tabla");
-const modal = document.getElementById("modal-contenedor");
-const barra = document.getElementById("modal-barra");
-
-let isDragging = false;
-let offsetX, offsetY;
 
 const raw = localStorage.getItem('user');
 const parsedUser = JSON.parse(raw);
@@ -14,15 +8,15 @@ const ipAdress = parsedUser.IP
 btnRegresar.addEventListener("click", regresarMain);
 
 window.addEventListener('DOMContentLoaded', () => {
-    listarMes();
+    listarMovs();
   });
 
 function regresarMain(){
     window.location.href = 'http://localhost:3300/empleado/ventanaPrincipalEmpleado'; //volver a main empleado
 }
 
-async function listarMes(){
-    const response = await fetch('/empleado/listarPlanillaMes', { 
+async function listarMovs(){
+    const response = await fetch('/empleado/listarMovimientos', { 
     method: 'POST',                                                
     headers: {
       'Content-Type': 'application/json'
@@ -33,24 +27,25 @@ async function listarMes(){
   const contenedor = document.getElementById("contenedor-tabla");
   contenedor.innerHTML = data.tabla;
 
- const celdasDeducciones = contenedor.querySelectorAll('.ver-deducciones');
+ const celdasDeducciones = contenedor.querySelectorAll('.ver-movs');
   celdasDeducciones.forEach(celda => {
     celda.addEventListener('click', () => {
-      const idMes = celda.dataset.idmes;
-      mostrarDeducciones(idMes);
+        const idMovtipo = celda.dataset.idmovtipo;
+        const idMov = celda.dataset.idmov;
+      mostrarMovimientos(idMov,idMovtipo);
     }); 
   }); 
 }
 
-async function mostrarDeducciones(idMes){
-    const response = await fetch('/empleado/desplegarDeducciones', { 
+async function mostrarMovimientos(idMov,idMovtipo){
+    const response = await fetch('/empleado/desgloseMovimientos', { 
     method: 'POST',                                                
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({username,idMes})
+    body: JSON.stringify({idMov,idMovtipo})
   });
-        console.error(username)
+
   const data = await response.json();
   const modal = document.getElementById("modal-deducciones");
   const modalContenedor = document.getElementById("modal-contenedor");
