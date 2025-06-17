@@ -14,7 +14,6 @@ const ipAdress = parsedUser.IP;
 btnInsertar.addEventListener("click", insertar);
 btnEliminar.addEventListener("click", eliminar);
 btnModificar.addEventListener("click", modificar);
-btnConsultar.addEventListener("click", consultar);
 btnImpersonar.addEventListener("click", impersonarEmpleado);
 btnSalir.addEventListener("click", regresarLogin);
 btnFiltrar.addEventListener("click", filtrarEmpleados);
@@ -136,20 +135,6 @@ function modificar(){
     if (empleado) {
         try {
             window.location.href = 'http://localhost:3300/modificarEmpleado/ventanaModificar'; // Redirige a la nueva página
-        } catch (error) {
-            console.error('Error:', error);
-        }
-    }
-    else {
-        window.alert("Debe seleccionar a un empleado");
-    }
-}
-
-function consultar(){
-    const empleado = localStorage.getItem('empleado');
-    if (empleado) {
-        try {
-            window.location.href = 'http://localhost:3300/consultar/ventanaConsultar'; // Redirige a la nueva página
         } catch (error) {
             console.error('Error:', error);
         }
