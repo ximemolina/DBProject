@@ -1,4 +1,4 @@
-CREATE PROCEDURE DesgloseSalario(
+CREATE PROCEDURE [dbo].[DesgloseSalario](
 	@inUsername VARCHAR( 64 ) 
 	,@inIdSemana INT
 	,@outResultCode INT OUTPUT )
@@ -18,16 +18,18 @@ BEGIN
 			DBO.Usuario AS U
 		INNER JOIN DBO.Empleado AS E
 		ON U.id = E.IdUsuario
+		WHERE
+			U.Nombre = @inUsername
 
 		SELECT
 			A.HoraInicio AS HoraEntrada
 			, A.HoraFin AS HoraSalida
 			, CASE WHEN T.id = 1 THEN M.QHoras ELSE 0 END AS HoraOrdinaria
 			, CASE WHEN T.id = 1 THEN P.Monto ELSE 0 END AS MontoHoraOrdinaria
-			, CASE WHEN T.id = 1 THEN M.QHoras ELSE 0 END AS HoraExtraNormal
-			, CASE WHEN T.id = 1 THEN P.Monto ELSE 0 END  AS MontoHoraExtraNormal
-			, CASE WHEN T.id = 1 THEN M.QHoras ELSE 0 END AS HoraExtraDoble
-			, CASE WHEN T.id = 1 THEN P.Monto ELSE 0 END AS MontoExtraDoble
+			, CASE WHEN T.id = 2 THEN M.QHoras ELSE 0 END AS HoraExtraNormal
+			, CASE WHEN T.id = 2 THEN P.Monto ELSE 0 END  AS MontoHoraExtraNormal
+			, CASE WHEN T.id = 3 THEN M.QHoras ELSE 0 END AS HoraExtraDoble
+			, CASE WHEN T.id = 3 THEN P.Monto ELSE 0 END AS MontoExtraDoble
 		FROM
 			DBO.EmpleadoXTipoJornadaXSemana AS E
 		INNER JOIN DBO.MarcaAsistencia AS A

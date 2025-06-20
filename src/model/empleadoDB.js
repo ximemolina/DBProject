@@ -395,7 +395,8 @@ export function setearDesgloseMovimientos(deducciones1) {
 
 function formatearHora(fecha) {
   const date = new Date(fecha);
-  const horas = date.getHours().toString().padStart(2, '0');
-  const minutos = date.getMinutes().toString().padStart(2, '0');
+  const horas = date.getUTCHours().toString().padStart(2, '0');
+  const minutos = date.getUTCMinutes().toString().padStart(2, '0');
+  console.log(date, horas, minutos);
   return `${horas}:${minutos}`;
 }
