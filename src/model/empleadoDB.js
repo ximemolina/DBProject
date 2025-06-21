@@ -187,7 +187,7 @@ export function setearTablaMovs(transacciones){
   for (const trans of transacciones) {
     tabla += `
       <tr>
-        <td class="py-3 px-4 border border-gray-200 text-center">${trans.Fecha}</td>
+        <td class="py-3 px-4 border border-gray-200 text-center">${formatearFecha(trans.Fecha)}</td>
         <td class="hover:bg-gray-200 py-3 px-4 border border-gray-200 text-center ver-movs"
             data-idmovtipo="${trans.IdTipoMovimiento}"
             data-idmov="${trans.IdMovimiento}">
@@ -399,4 +399,12 @@ function formatearHora(fecha) {
   const minutos = date.getUTCMinutes().toString().padStart(2, '0');
   console.log(date, horas, minutos);
   return `${horas}:${minutos}`;
+}
+
+function formatearFecha(fecha) {
+  const date = new Date(fecha);
+  const año = date.getFullYear();
+  const mes = (date.getMonth() + 1).toString().padStart(2, '0'); // Los meses van de 0 a 11
+  const dia = date.getDate().toString().padStart(2, '0');
+  return `${año}-${mes}-${dia}`;
 }
